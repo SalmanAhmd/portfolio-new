@@ -5,7 +5,7 @@ export const PROFILE = {
   experience: '6+ years building production software',
   email: 'salman@example.com',
   github: 'https://github.com/salmanahmd',
-  linkedin: 'https://www.linkedin.com/in/salmanahmd',
+  linkedin: 'https://www.linkedin.com/in/ansari-salman/',
   company: 'Fyntune Solutions',
   since: 'June 2020',
 } as const
