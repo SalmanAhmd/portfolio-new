@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --nav-h: 68px;
+    --accent: #d4541e;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 24px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 24;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #111110;
+    color: #f7f7f4;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-medium tracking-tightest;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-label text-ink-faint;
+  }
+
+  .section {
+    @apply relative py-20 sm:py-28 lg:py-36;
+  }
+
+  .section-head {
+    @apply mb-12 sm:mb-16;
+  }
+
+  .section-index {
+    @apply label mb-5 flex items-center gap-3 text-ink-faint;
+  }
+
+  .section-index::after {
+    content: '';
+    @apply h-px flex-1 bg-line;
+  }
+
+  .headline-xl {
+    @apply text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-[4.4rem];
+  }
+
+  .headline-lg {
+    @apply text-[2rem] leading-[1.06] sm:text-5xl lg:text-[3.4rem];
+  }
+
+  .body-lg {
+    @apply text-[17px] leading-relaxed text-ink-muted sm:text-lg;
+  }
+
+  .hairline {
+    @apply border-line;
+  }
+
+  .btn {
+    @apply relative inline-flex h-11 select-none items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-all duration-300 ease-out-expo;
+  }
+
+  .btn-solid {
+    @apply btn bg-ink text-paper hover:bg-ink-soft;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line-strong bg-transparent text-ink hover:border-ink hover:bg-ink/[0.04];
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .card {
+    @apply rounded-xl border border-line bg-paper-raised transition-all duration-300 ease-out-expo;
+  }
+
+  .code-chip {
+    @apply rounded-md border border-line bg-paper-sunk px-2 py-1 font-mono text-[11px] text-ink-muted;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(17, 17, 16, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(17, 17, 16, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .noise {
+    position: relative;
+  }
+
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
