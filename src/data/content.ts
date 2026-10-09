@@ -1,12 +1,12 @@
 export const PROFILE = {
   name: 'Salman Ahmed Ansari',
-  role: 'Senior Lead Frontend Developer',
+  role: 'Sr. Lead Engineer — Frontend',
   location: 'Mumbai, India',
   experience: '6+ years building production software',
   email: 'developer.salmanahmed@gmail.com',
   github: 'https://github.com/salmanahmd',
   linkedin: 'https://www.linkedin.com/in/ansari-salman/',
-  company: 'Fyntune Solutions',
+  company: 'FynTune Solutions',
   since: 'June 2020',
 } as const
 
@@ -57,7 +57,7 @@ export const CASE_METRICS = [
       'Feature units with defined entry points and dependencies, so a screen composes modules instead of owning them.',
   },
   {
-    value: 450,
+    value: 500,
     suffix: '+',
     label: 'routes',
     meaning:
@@ -92,7 +92,7 @@ export const CASE_LAYERS = [
     title: 'Feature Modules',
     meta: '300+ units',
     detail:
-      'Business workflows live here: enrollment, claims, benefits, admin tooling. Each module exposes a narrow surface and declares its own dependencies, which is what keeps a 450+ route application navigable for the team building it.',
+      'Business workflows live here: enrollment, claims, benefits, admin tooling. Each module exposes a narrow surface and declares its own dependencies, which is what keeps a 500+ route application navigable for the team building it.',
   },
   {
     id: 'shared',
@@ -113,7 +113,15 @@ export const CASE_LAYERS = [
 export const CASE_CHALLENGES = [
   {
     title: 'Multi-tenant frontend architecture',
-    body: 'One application serving twelve organizations: tenant identity resolved at the shell, expressed through configuration and theming rather than forked codebases.',
+    body: 'One platform serving twelve organizations and 9M+ users: tenant identity resolved at the shell, expressed through configuration and theming rather than forked codebases.',
+  },
+  {
+    title: 'Separating broker and insurer applications',
+    body: 'Defining the architectural boundaries that let broker and insurer applications live in independent repositories — cleaner ownership, independent releases and a path to onboard new insurer partners.',
+  },
+  {
+    title: 'Configuration-driven onboarding',
+    body: 'New brokers and insurers onboard with minimal custom development: products, branding, permissions and rules are configuration the platform reads, not code each client forks.',
   },
   {
     title: 'Dynamic business rules',
@@ -125,7 +133,7 @@ export const CASE_CHALLENGES = [
   },
   {
     title: 'Large route structure',
-    body: '450+ routes organized around feature ownership, with route-level code splitting and a loading strategy that keeps first paint small.',
+    body: '500+ routes organized around feature ownership, with route-level code splitting, lazy loading and React Suspense keeping first paint small.',
   },
   {
     title: 'Reusable modules & design system',
@@ -136,12 +144,20 @@ export const CASE_CHALLENGES = [
     body: 'Code splitting, lazy loading, image optimization and render-cost review applied continuously, because a platform this size makes every kilobyte and re-render visible to users.',
   },
   {
+    title: 'Framework modernization: React 16 → 18',
+    body: 'Led a staged React 16 to React 18 migration with dependency upgrades and React Router modernization — modernizing a large surface without stalling delivery.',
+  },
+  {
     title: 'Build modernization: CRA → Vite',
     body: 'Migrated the application from Create React App to Vite — reworking configuration, environment handling and build scripts to cut developer feedback loops and modernize the toolchain.',
   },
   {
+    title: 'Leading a frontend team of nine',
+    body: 'Owning architecture, technical design, sprint planning, code quality, release management and engineering standards while mentoring a growing team of React engineers.',
+  },
+  {
     title: 'Testing & engineering practice',
-    body: 'Testing introduced where it protects critical workflows, paired with code review discipline and CI checks so refactors on a large codebase stay safe.',
+    body: 'Automated testing introduced where it protects critical workflows, paired with code review discipline and CI checks so refactors on a large codebase stay safe.',
   },
 ] as const
 
@@ -150,15 +166,66 @@ export const CASE_CHALLENGES = [
 /* ------------------------------------------------------------------ */
 
 export const JOURNEY = [
-  { year: '2020', title: 'Joined Fyntune', note: 'React development on insurance products' },
-  { year: '', title: 'Employee Benefit platform', note: 'From feature work to owning a product surface' },
-  { year: '', title: 'Large-scale module development', note: '300+ modules, 450+ routes' },
-  { year: '', title: 'Frontend architecture', note: 'Structure, boundaries, contracts' },
-  { year: '', title: 'Team leadership', note: 'Reviews, mentoring, direction' },
-  { year: '', title: 'CRA → Vite migration', note: 'Modernized the build toolchain' },
-  { year: '', title: 'Performance optimization', note: 'Splitting, lazy loading, image and render cost' },
-  { year: '', title: 'Testing & engineering practices', note: 'Safety nets for a large codebase' },
-  { year: 'Now', title: 'Frontend architecture / system engineering', note: 'The direction the work keeps pulling toward' },
+  {
+    year: '2020',
+    title: 'Joined FynTune as a founding frontend engineer',
+    note: 'One of three engineers building a digital insurance and employee benefits platform from the ground up.',
+  },
+  {
+    year: '',
+    title: 'Built the platform foundation',
+    note: 'Delivered 80+ business modules — claims, policy administration, enrollment, wellness and hospital discovery.',
+  },
+  {
+    year: '2021',
+    title: 'First enterprise onboarding',
+    note: 'Shipped the first client onto the platform and proved the multi-tenant model.',
+  },
+  {
+    year: '',
+    title: 'Configuration over customization',
+    note: 'Designed the config-driven approach that let new clients onboard without forking the codebase.',
+  },
+  {
+    year: '',
+    title: 'Mobile launch',
+    note: 'Led React Native employee apps to the Apple App Store and Google Play.',
+  },
+  {
+    year: '2022',
+    title: 'Travel Insurance in three months',
+    note: 'Led a team of three to launch a new insurance line end to end — alongside Cyber and Travel offerings.',
+  },
+  {
+    year: '2023',
+    title: 'Promoted to Senior ReactJS Developer',
+    note: 'Took ownership of frontend delivery, technical mentorship and product expansion for enterprise clients.',
+  },
+  {
+    year: '',
+    title: 'Scaled the team and the surface',
+    note: 'Grew the team from 4 to 6; delivered 180+ modules across RFQ, plan management, E-Cashless claims, TPA and enrollment.',
+  },
+  {
+    year: '2024',
+    title: 'Modernized the stack',
+    note: 'React 16 → React 18, dependency upgrades and React Router modernization.',
+  },
+  {
+    year: '2026',
+    title: 'Promoted to Sr. Lead Engineer — Frontend',
+    note: 'Leading 9 React engineers across architecture, engineering standards and delivery execution.',
+  },
+  {
+    year: '',
+    title: 'Broker and insurer, separated',
+    note: 'Split the two applications into independent repositories along clear architectural boundaries.',
+  },
+  {
+    year: 'Now',
+    title: 'Frontend architecture / system engineering',
+    note: 'The direction the work keeps pulling toward — structure, boundaries and contracts at platform scale.',
+  },
 ] as const
 
 /* ------------------------------------------------------------------ */
@@ -166,16 +233,20 @@ export const JOURNEY = [
 /* ------------------------------------------------------------------ */
 
 export const EXPERIENCE_POINTS = [
-  'Built and scaled the frontend of a multi-tenant employee benefits platform serving large insurance organizations.',
-  'Led frontend development — direction, structure and code review across a growing team.',
-  'Architected reusable feature modules and shared component systems that new workflows are assembled from.',
-  'Worked across React and React Native applications in production.',
-  'Designed for complex business workflows where rules, permissions and conditional UI change frequently.',
-  'Led modernization initiatives, including the CRA → Vite build migration.',
-  'Improved performance through code splitting, lazy loading, image optimization and render-cost review.',
-  'Introduced testing and engineering practices suited to a large, fast-moving codebase.',
-  'Mentored developers and raised the standard of day-to-day code review.',
-  'Collaborated closely with backend, product and design teams — frontend as a partner in product decisions, not an output stage.',
+  'Lead frontend engineering for a multi-tenant InsurTech platform serving 9M+ users across brokers, insurers, employers and employees.',
+  'Own frontend architecture, technical strategy, engineering standards and delivery for 300+ business modules and 500+ routes spanning 12 insurance organizations.',
+  'Manage and mentor a team of 9 React engineers — sprint planning, technical design, code quality, release management and engineering practices.',
+  'Spearheaded insurer onboarding by separating broker and insurer applications into independent repositories along defined architectural boundaries.',
+  'Led modernization initiatives: CRA → Vite migration, bundle optimization with lazy loading and React Suspense, image optimization, and automated testing adoption.',
+  'Evolved the configuration-driven multi-tenant architecture so new brokers and insurers onboard with minimal custom development.',
+  'Drove a React 16 → React 18 migration, dependency upgrades and React Router modernization across a large surface.',
+  'Delivered 180+ business modules across RFQ and plan management, E-Cashless claim journeys, TPA portals, aviation insurance and flexible enrollment.',
+  'As a founding engineer, delivered the first 80+ modules that became the foundation of the platform, plus the first enterprise client onboarding.',
+  'Launched employee-facing React Native apps on the App Store and Google Play, and led a team of three to ship the Travel Insurance platform in three months.',
+  'Integrated third-party services — payment gateways, wellness platforms and TPAs — to extend platform capabilities.',
+  'Partner closely with product leaders, business stakeholders and enterprise clients (CEOs, CTOs and department heads) to translate complex insurance workflows into configurable solutions.',
+  'Own delivery and stakeholder management for enterprise accounts — requirement analysis, production support and incident resolution.',
+  'Contribute to organizational growth through technical interviewing, hiring, mentoring and career development of frontend engineers.',
 ] as const
 
 /* ------------------------------------------------------------------ */
@@ -215,6 +286,7 @@ export const STACK: { group: string; caption: string; items: StackItem[] }[] = [
     items: [
       { name: 'Code Splitting' },
       { name: 'Lazy Loading' },
+      { name: 'React Suspense' },
       { name: 'Bundle Optimization' },
       { name: 'Image Optimization' },
       { name: 'Rendering Performance' },
@@ -274,12 +346,12 @@ export const PROJECTS: Project[] = [
     problem:
       'Insurance organizations each need their own products, branding, permissions and rules — but maintaining separate frontends for every tenant does not scale in cost, quality or speed.',
     solution:
-      'A single multi-tenant React application: tenant resolved at the shell, permissions read from the backend, business rules consumed as data, and 300+ feature modules composed into 450+ routes.',
-    stack: ['React', 'JavaScript', 'Modular architecture', 'Vite', 'Testing'],
+      'A multi-tenant React platform: tenant resolved at the shell, permissions read from the backend, business rules consumed as data, and 300+ feature modules composed into 500+ routes — with broker and insurer applications separated into independent repositories as it grew.',
+    stack: ['React', 'JavaScript', 'Modular architecture', 'React Router', 'Vite', 'Testing'],
     challenge:
-      'Keeping the system understandable as it grew — defining module boundaries, preventing tenant-specific conditionals from leaking everywhere, and holding performance steady across a route graph too large to load eagerly.',
+      'Keeping the system understandable as it grew — defining module boundaries, separating broker and insurer concerns, preventing tenant-specific conditionals from leaking everywhere, and holding performance steady across a route graph too large to load eagerly.',
     outcome:
-      'Twelve organizations served from one codebase, with a structure that lets new products and workflows be assembled from existing modules instead of rebuilt.',
+      'Twelve organizations and 9M+ users served from one platform, now led by a team of nine engineers, with a structure that lets new products and workflows be assembled from existing modules instead of rebuilt.',
   },
   {
     id: 'rn',
@@ -295,7 +367,7 @@ export const PROJECTS: Project[] = [
     challenge:
       'Platform differences: navigation, performance characteristics, release cadence and device behaviour all diverge from the web, while the product language must stay consistent.',
     outcome:
-      'Shipped mobile applications in production with a shared mental model across web and mobile, keeping the team able to move between surfaces.',
+      'Employee-facing apps shipped to production on the Apple App Store and Google Play, with a shared mental model across web and mobile that kept the team able to move between surfaces.',
   },
   {
     id: 'salah',
