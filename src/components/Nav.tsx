@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { NAV_LINKS, PROFILE } from '../data/content'
 import { useActiveSection, useScrollProgress } from '../hooks'
 
@@ -46,6 +47,10 @@ export default function Nav() {
     <>
       <a
         href="#main"
+        onClick={(event) => {
+          event.preventDefault()
+          document.getElementById('main')?.focus()
+        }}
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-paper"
       >
         Skip to content
@@ -61,8 +66,8 @@ export default function Nav() {
           className="container-page flex h-full items-center justify-between gap-6"
           aria-label="Primary"
         >
-          <a
-            href="#top"
+          <Link
+            to="/#top"
             className="group flex min-h-10 items-center gap-2.5 py-2 text-[15px] font-medium tracking-tight"
           >
             <span
@@ -70,15 +75,15 @@ export default function Nav() {
               className="h-4 w-4 rounded-[5px] bg-ink transition-transform duration-500 ease-out-expo group-hover:rotate-90"
             />
             {PROFILE.name}
-          </a>
+          </Link>
 
           <ul className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => {
               const isActive = active === link.id
               return (
                 <li key={link.id}>
-                  <a
-                    href={`#${link.id}`}
+                  <Link
+                    to={`/#${link.id}`}
                     aria-current={isActive ? 'true' : undefined}
                     className={`relative block px-3.5 py-2 text-[13.5px] transition-colors duration-200 ${
                       isActive ? 'text-ink' : 'text-ink-muted hover:text-ink'
@@ -91,19 +96,19 @@ export default function Nav() {
                         isActive ? 'scale-x-100' : 'scale-x-0'
                       }`}
                     />
-                  </a>
+                  </Link>
                 </li>
               )
             })}
           </ul>
 
           <div className="flex items-center gap-2">
-            <a href="#contact" className="btn-ghost group hidden h-9 px-4 text-[13.5px] sm:inline-flex">
+            <Link to="/#contact" className="btn-ghost group hidden h-9 px-4 text-[13.5px] sm:inline-flex">
               Let’s talk
               <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
                 →
               </span>
-            </a>
+            </Link>
             <button
               type="button"
               ref={toggleRef}
@@ -153,28 +158,28 @@ export default function Nav() {
                 className={open ? 'animate-menu-in' : ''}
                 style={{ animationDelay: `${60 + i * 45}ms` }}
               >
-                <a
-                  href={`#${link.id}`}
+                <Link
+                  to={`/#${link.id}`}
                   onClick={() => setOpen(false)}
                   className="flex items-baseline justify-between border-b border-line py-5 text-3xl font-medium tracking-tightest"
                 >
                   {link.label}
                   <span className="label tabular">{String(i + 1).padStart(2, '0')}</span>
-                </a>
+                </Link>
               </li>
             ))}
             <li
               className={open ? 'animate-menu-in' : ''}
               style={{ animationDelay: `${60 + NAV_LINKS.length * 45}ms` }}
             >
-              <a
-                href="#contact"
+              <Link
+                to="/#contact"
                 onClick={() => setOpen(false)}
                 className="flex items-baseline justify-between border-b border-line py-5 text-3xl font-medium tracking-tightest text-accent"
               >
                 Let’s talk
                 <span aria-hidden>→</span>
-              </a>
+              </Link>
             </li>
           </ul>
 

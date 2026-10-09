@@ -375,3 +375,65 @@ export const NOTE_TOPICS = [
   'AI-assisted development',
   'Lessons from large frontend systems',
 ] as const
+
+/* ------------------------------------------------------------------ */
+/* Blog                                                                */
+/* ------------------------------------------------------------------ */
+
+export type BlogPost = {
+  slug: string
+  title: string
+  summary: string
+  date: string
+  readingTime: string
+  tags: string[]
+  body: string[]
+}
+
+export const POSTS: BlogPost[] = [
+  {
+    slug: 'where-complexity-lives',
+    title: 'Frontend architecture is a decision about where complexity lives',
+    summary:
+      'You cannot remove complexity from a system — you can only choose where it is allowed to live. Most architecture debates are really arguments about that placement.',
+    date: '2026-08-14',
+    readingTime: '4 min read',
+    tags: ['Frontend architecture', 'Systems'],
+    body: [
+      'Every frontend starts simple and every frontend that survives gets complicated. The question is never whether complexity appears — it is where you let it settle. Put it in the component tree and it spreads across every screen that touches the feature. Put it in a contract, a module boundary or a permission engine and it stays in one place long enough to reason about.',
+      'I stopped judging architecture by how clever the abstractions are and started judging it by how far a change has to travel. When a pricing rule changes and the fix belongs to the backend, that is a good boundary. When the same change leaks into a dozen components because each one re-derived the rule, the placement was wrong.',
+      'This is why I care about thin shells, narrow module surfaces and backend-driven configuration. None of them are exciting. All of them are about deciding, deliberately, which layer is allowed to be complicated — so the rest of the system can stay boring.',
+      'Boring is underrated. A codebase that 300 modules and many hands can keep changing is worth more than an elegant one nobody dares touch.',
+    ],
+  },
+  {
+    slug: 'splitting-450-routes',
+    title: 'Splitting a 450-route application without breaking navigation',
+    summary:
+      'Route-level code splitting sounds like a build setting. In a large app it is a navigation design problem — what loads eagerly, what waits, and what the user sees in between.',
+    date: '2026-06-02',
+    readingTime: '5 min read',
+    tags: ['Performance', 'React', 'Routing'],
+    body: [
+      'A 450-route application cannot be loaded eagerly, and it cannot be split by gut feeling either. The goal is not the smallest possible bundle — it is the smallest bundle that still feels instant for the workflow the user is actually in.',
+      'I split along ownership lines rather than file size. A feature module loads with its own routes, its own data and its own permissions so the boundary is meaningful. Shared primitives, the design system and the shell stay eager because almost every screen needs them and a waterfall there is a tax on everything.',
+      'The part people underestimate is the loading experience. A lazy route that flashes a spinner for 40ms is worse than no spinner at all; a route that fetches before it renders is worse than one that renders a skeleton. Splitting is only an optimization if the seams are invisible.',
+      'Measure first, split second. On a route graph this size, the wins come from understanding the navigation graph, not from applying a pattern everywhere because it is correct in principle.',
+    ],
+  },
+  {
+    slug: 'one-frontend-twelve-tenants',
+    title: 'One frontend, twelve tenants — what multi-tenancy actually costs',
+    summary:
+      'Twelve organizations on a single codebase sounds like a scaling win. It is also a permanent constraint on where tenant-specific behaviour is allowed to exist.',
+    date: '2026-04-19',
+    readingTime: '4 min read',
+    tags: ['Multi-tenant', 'Architecture'],
+    body: [
+      'The pitch for multi-tenancy is simple: one codebase, less duplication, faster delivery. The cost is that every tenant-specific need is a temptation to add one more conditional, and a thousand small conditionals are indistinguishable from a fork.',
+      'The discipline is to resolve tenant identity once, at the shell, and let everything downstream read from that resolved context. Branding, product catalogue, feature flags and permissions all become data the interface consumes — not branches scattered through components.',
+      'When someone asks for "just a small difference for one client", the honest answer is usually that the difference belongs in configuration, not code. Configuration scales. Conditionals do not.',
+      'Twelve tenants from one codebase is a real win, but only if the boundary is defended every week. Multi-tenancy is not a feature you ship; it is a constraint you keep.',
+    ],
+  },
+]

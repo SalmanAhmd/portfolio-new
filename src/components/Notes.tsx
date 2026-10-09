@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
-import { NOTE_TOPICS } from '../data/content'
+import { NOTE_TOPICS, POSTS } from '../data/content'
 
 export default function Notes() {
   return (
@@ -16,22 +17,34 @@ export default function Notes() {
         <Reveal>
           <div className="grid gap-8 border-y border-line py-10 sm:grid-cols-12 sm:gap-10">
             <div className="sm:col-span-5">
-              <div className="rounded-xl border border-dashed border-line-strong bg-paper-raised/60 p-6">
-                <div className="flex items-center justify-between">
-                  <span className="label">Status</span>
-                  <span className="flex items-center gap-2">
-                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-dot" />
-                    <span className="font-mono text-[11px] uppercase tracking-label text-accent-deep">
-                      Drafting
+              <Link
+                to="/blog"
+                className="group flex h-full flex-col justify-between rounded-xl border border-line bg-paper-raised p-6 transition-all duration-300 ease-out-expo hover:border-line-strong hover:shadow-[0_18px_50px_-32px_rgba(17,17,16,0.45)]"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="label">Blog</span>
+                    <span className="flex items-center gap-2">
+                      <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-dot" />
+                      <span className="font-mono text-[11px] uppercase tracking-label text-accent-deep">
+                        {POSTS.length > 0 ? 'Published' : 'Drafting'}
+                      </span>
                     </span>
-                  </span>
+                  </div>
+                  <p className="mt-5 text-xl font-medium tracking-tightest">Read the notes</p>
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
+                    {POSTS.length > 0
+                      ? `${POSTS.length} ${POSTS.length === 1 ? 'note' : 'notes'} on architecture, performance and building frontend systems that last.`
+                      : 'The first notes will appear here.'}
+                  </p>
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-ink-muted">
-                  No published articles yet. Rather than fill this section with placeholder posts,
-                  I’m leaving it honest: the first notes will appear here.
-                </p>
-                <p className="label mt-6">Coming soon</p>
-              </div>
+                <span className="mt-8 inline-flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-label text-ink transition-colors group-hover:text-accent-deep">
+                  Visit the blog
+                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
+              </Link>
             </div>
 
             <div className="sm:col-span-7">

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { PROFILE } from '../data/content'
 
 export default function Footer() {
@@ -34,12 +35,12 @@ export default function Footer() {
           >
             Email
           </a>
-          <a
-            href="#top"
+          <Link
+            to="/#top"
             className="link-underline inline-flex min-h-8 items-center py-1.5 font-mono text-[11.5px] uppercase tracking-label text-ink-muted hover:text-ink"
           >
             Back to top ↑
-          </a>
+          </Link>
         </div>
 
         <p className="label normal-case tracking-normal text-ink-faint">

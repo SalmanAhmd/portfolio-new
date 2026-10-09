@@ -1,7 +1,9 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 type Props = {
-  href: string
+  href?: string
+  to?: string
   children: ReactNode
   className?: string
   external?: boolean
@@ -15,6 +17,7 @@ type Props = {
  */
 export default function Magnetic({
   href,
+  to,
   children,
   className = '',
   external = false,
@@ -60,6 +63,14 @@ export default function Magnetic({
       el.removeEventListener('blur', reset)
     }
   }, [strength])
+
+  if (to) {
+    return (
+      <Link ref={ref} to={to} className={className} style={style}>
+        {children}
+      </Link>
+    )
+  }
 
   return (
     <a

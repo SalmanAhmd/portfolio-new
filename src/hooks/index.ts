@@ -124,6 +124,12 @@ export function useScrollProgress(): number {
   return progress
 }
 
+export function useDocumentTitle(title: string): void {
+  useEffect(() => {
+    document.title = title
+  }, [title])
+}
+
 export function useActiveSection(ids: string[]): string {
   const [active, setActive] = useState(ids[0] ?? '')
 

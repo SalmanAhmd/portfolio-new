@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 import { PROJECTS, type Project } from '../data/content'
@@ -128,12 +129,12 @@ function ProjectRow({ project, defaultOpen }: { project: Project; defaultOpen: b
                       </span>
                     </a>
                   ) : project.id === 'ebp' ? (
-                    <a href="#case-study" className="group/link inline-flex min-h-8 items-center gap-1.5 py-1.5 text-sm font-medium text-ink">
+                    <Link to="/#case-study" className="group/link inline-flex min-h-8 items-center gap-1.5 py-1.5 text-sm font-medium text-ink">
                       Read the full case study
                       <span aria-hidden className="transition-transform duration-300 group-hover/link:translate-x-0.5">
                         ↑
                       </span>
-                    </a>
+                    </Link>
                   ) : (
                     <p className="text-sm text-ink-faint">In production.</p>
                   )}

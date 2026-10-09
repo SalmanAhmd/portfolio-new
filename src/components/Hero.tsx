@@ -41,13 +41,13 @@ export default function Hero() {
 
             <Reveal delay={240}>
               <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Magnetic href="#work" className="btn-solid group">
+                <Magnetic to="/#work" className="btn-solid group">
                   View my work
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-y-0.5">
                     ↓
                   </span>
                 </Magnetic>
-                <Magnetic href="#contact" className="btn-ghost group" strength={0.1}>
+                <Magnetic to="/#contact" className="btn-ghost group" strength={0.1}>
                   Let’s talk
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
                     →

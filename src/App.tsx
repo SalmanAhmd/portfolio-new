@@ -1,33 +1,50 @@
+import { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
-import Hero from './components/Hero'
-import Philosophy from './components/Philosophy'
-import CaseStudy from './components/CaseStudy'
-import Work from './components/Work'
-import Journey from './components/Journey'
-import Experience from './components/Experience'
-import Stack from './components/Stack'
-import Method from './components/Method'
-import Focus from './components/Focus'
-import Notes from './components/Notes'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Home from './pages/Home'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
+import NotFound from './pages/NotFound'
+
+function ScrollManager() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.slice(1)
+      let frame = 0
+      let tries = 0
+      const scroll = () => {
+        const el = document.getElementById(id)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          return
+        }
+        if (tries++ < 30) frame = requestAnimationFrame(scroll)
+      }
+      frame = requestAnimationFrame(scroll)
+      return () => cancelAnimationFrame(frame)
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [location.pathname, location.hash])
+
+  return null
+}
 
 export default function App() {
   return (
     <>
+      <ScrollManager />
       <Nav />
-      <main id="main">
-        <Hero />
-        <Philosophy />
-        <CaseStudy />
-        <Work />
-        <Journey />
-        <Experience />
-        <Stack />
-        <Method />
-        <Focus />
-        <Notes />
-        <Contact />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
     </>
