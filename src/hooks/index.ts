@@ -130,13 +130,23 @@ export function useDocumentTitle(title: string): void {
   }, [title])
 }
 
-export function useActiveSection(ids: string[]): string {
+/**
+ * Tracks which section is currently in view. `key` should change whenever the
+ * underlying sections are (re)mounted — e.g. the route pathname — otherwise the
+ * observer keeps holding detached nodes after navigating away and back.
+ */
+export function useActiveSection(ids: string[], key?: unknown): string {
   const [active, setActive] = useState(ids[0] ?? '')
 
   useEffect(() => {
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el))
+
+    if (sections.length === 0) {
+      setActive('')
+      return
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -150,7 +160,7 @@ export function useActiveSection(ids: string[]): string {
 
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [ids])
+  }, [ids, key])
 
   return active
 }

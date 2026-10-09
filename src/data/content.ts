@@ -11,11 +11,11 @@ export const PROFILE = {
 } as const
 
 export const NAV_LINKS = [
+  { id: 'about', label: 'About' },
   { id: 'work', label: 'Work' },
   { id: 'experience', label: 'Experience' },
   { id: 'engineering', label: 'Engineering' },
   { id: 'notes', label: 'Notes' },
-  { id: 'about', label: 'About' },
 ] as const
 
 /* ------------------------------------------------------------------ */

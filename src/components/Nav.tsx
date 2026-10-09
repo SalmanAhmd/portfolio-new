@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS, PROFILE } from '../data/content'
 import { useActiveSection, useScrollProgress } from '../hooks'
 
@@ -12,7 +12,8 @@ export default function Nav() {
   const toggleRef = useRef<HTMLButtonElement>(null)
   const wasOpen = useRef(false)
   const progress = useScrollProgress()
-  const active = useActiveSection(NAV_IDS)
+  const location = useLocation()
+  const active = useActiveSection(NAV_IDS, location.pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
