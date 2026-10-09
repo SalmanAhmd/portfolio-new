@@ -1,6 +1,6 @@
 export const PROFILE = {
   name: 'Salman Ahmed Ansari',
-  role: 'Sr. Lead Engineer — Frontend',
+  role: 'Sr. Lead Engineer, Frontend',
   location: 'Mumbai, India',
   experience: '6+ years building production software',
   email: 'developer.salmanahmed@gmail.com',
@@ -462,7 +462,30 @@ export type BlogPost = {
   body: string[]
 }
 
+export function formatPostDate(iso: string): string {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+}
+
 export const POSTS: BlogPost[] = [
+  {
+    slug: 'leading-a-team-of-nine',
+    title: 'What leading nine frontend engineers actually changes',
+    summary:
+      'The jump from senior engineer to lead is not more code — it is fewer decisions made alone and more decisions made explicit so nine people can act on them.',
+    date: '2026-10-01',
+    readingTime: '4 min read',
+    tags: ['Engineering leadership', 'Architecture'],
+    body: [
+      'For a long time the job was to be the person with the answer. As a lead, that instinct becomes a bottleneck. Nine engineers cannot wait on one head, and they should not have to.',
+      'What replaces it is written-down intent: clear module boundaries, documented conventions, and a shared definition of what good looks like. The decisions do not get less numerous — they get less personal.',
+      'The work shifts to unblocking: reviewing the design before the code, making sure the risky change has a reviewer who understands it, and protecting the delivery cadence from the thousand small things that would otherwise stall it.',
+      'I still write code, and I think a lead should. But the highest-leverage thing I do now is remove ambiguity, because ambiguity is what makes a team slow and a codebase drift.',
+    ],
+  },
   {
     slug: 'where-complexity-lives',
     title: 'Frontend architecture is a decision about where complexity lives',
@@ -479,18 +502,63 @@ export const POSTS: BlogPost[] = [
     ],
   },
   {
-    slug: 'splitting-450-routes',
-    title: 'Splitting a 450-route application without breaking navigation',
+    slug: 'separating-broker-and-insurer-surfaces',
+    title: 'When one app becomes two: separating broker and insurer surfaces',
+    summary:
+      'Splitting a monolithic frontend into independent repositories is less about tooling and more about deciding which boundaries are real.',
+    date: '2026-07-10',
+    readingTime: '4 min read',
+    tags: ['Architecture', 'Multi-tenant'],
+    body: [
+      'The platform had grown to serve two very different users — brokers selling and administering, and insurers underwriting — inside one application. It worked, but every change carried the weight of both.',
+      'The split only made sense once the boundary was named: what is genuinely shared, and what only one side needs. Without that, moving code into a new repository simply relocates the coupling.',
+      'Independent repositories bought us clearer ownership, independent release rhythms and a much easier path to onboarding a new insurer partner. They also cost us: the shared layer has to be versioned and treated as a real dependency, not a folder everyone edits.',
+      'The lesson is that a repository split is an architectural decision that happens to use tooling. Get the boundary wrong and two repositories are worse than one.',
+    ],
+  },
+  {
+    slug: 'splitting-500-routes',
+    title: 'Splitting a 500-route application without breaking navigation',
     summary:
       'Route-level code splitting sounds like a build setting. In a large app it is a navigation design problem — what loads eagerly, what waits, and what the user sees in between.',
     date: '2026-06-02',
     readingTime: '5 min read',
     tags: ['Performance', 'React', 'Routing'],
     body: [
-      'A 450-route application cannot be loaded eagerly, and it cannot be split by gut feeling either. The goal is not the smallest possible bundle — it is the smallest bundle that still feels instant for the workflow the user is actually in.',
+      'A 500-route application cannot be loaded eagerly, and it cannot be split by gut feeling either. The goal is not the smallest possible bundle — it is the smallest bundle that still feels instant for the workflow the user is actually in.',
       'I split along ownership lines rather than file size. A feature module loads with its own routes, its own data and its own permissions so the boundary is meaningful. Shared primitives, the design system and the shell stay eager because almost every screen needs them and a waterfall there is a tax on everything.',
       'The part people underestimate is the loading experience. A lazy route that flashes a spinner for 40ms is worse than no spinner at all; a route that fetches before it renders is worse than one that renders a skeleton. Splitting is only an optimization if the seams are invisible.',
       'Measure first, split second. On a route graph this size, the wins come from understanding the navigation graph, not from applying a pattern everywhere because it is correct in principle.',
+    ],
+  },
+  {
+    slug: 'react-16-to-18-migration',
+    title: 'Migrating React 16 to 18 on a codebase you cannot pause',
+    summary:
+      'A framework migration at scale is less about the new APIs and more about sequencing, observability and not freezing the product roadmap.',
+    date: '2026-05-12',
+    readingTime: '5 min read',
+    tags: ['React', 'Performance'],
+    body: [
+      'Nobody stops shipping so you can upgrade React. The migration has to happen underneath a running product, which turns it into a sequencing problem before it is a technical one.',
+      'We went in stages: dependencies first, then React, then the React Router modernization the new version made worth doing. Each stage had to be independently safe to ship.',
+      'The hazards are rarely in the components you remember. They hide in dependencies that pin old versions, in code leaning on legacy behaviour, and in the parts of the app nobody has opened in years. Those are what the plan has to account for.',
+      'A migration is done when the team stops thinking about it. That means doing the unglamorous cleanup too — otherwise you have simply carried the old assumptions forward.',
+    ],
+  },
+  {
+    slug: 'configuration-over-customization',
+    title: 'Configuration over customization: onboarding clients without forking',
+    summary:
+      'The tempting answer to “one client needs a small change” is a conditional. The sustainable answer is usually configuration — and the difference compounds.',
+    date: '2026-05-01',
+    readingTime: '4 min read',
+    tags: ['Multi-tenant', 'Architecture'],
+    body: [
+      'Every enterprise client asks for something the platform does not do yet. The fast answer is a branch for that client. The fast answer is also how a single codebase quietly becomes twelve.',
+      'Configuration flips the default: instead of writing behaviour for one client, you model the axis of variation and let the client set a value. Products, branding, permissions, rules and workflows all became data the interface reads.',
+      'This is harder up front. It forces you to name the abstraction and accept that not every request is truly unique. But it means onboarding the next client is a task, not a project.',
+      'The question I ask now is simple: is this a new capability, or a new value for an existing one? If it is the latter, it belongs in configuration.',
     ],
   },
   {
@@ -506,6 +574,21 @@ export const POSTS: BlogPost[] = [
       'The discipline is to resolve tenant identity once, at the shell, and let everything downstream read from that resolved context. Branding, product catalogue, feature flags and permissions all become data the interface consumes — not branches scattered through components.',
       'When someone asks for "just a small difference for one client", the honest answer is usually that the difference belongs in configuration, not code. Configuration scales. Conditionals do not.',
       'Twelve tenants from one codebase is a real win, but only if the boundary is defended every week. Multi-tenancy is not a feature you ship; it is a constraint you keep.',
+    ],
+  },
+  {
+    slug: 'shipping-react-native-to-both-stores',
+    title: 'Shipping React Native apps to both stores as a web team',
+    summary:
+      'Reaching mobile without a separate mobile team means leaning on the conventions you already have — and respecting the places where the platform will not let you.',
+    date: '2026-03-08',
+    readingTime: '4 min read',
+    tags: ['React Native', 'Mobile'],
+    body: [
+      'We did not build a mobile team; we extended the one we had. React Native made that possible because the mental model — components, state, API contracts — carried over from the web.',
+      'What does not carry over is everything below the component: navigation, performance characteristics, release cadence and device behaviour. A web team has to learn these rather than assume them.',
+      'The payoff is real. The same engineers could move between surfaces, and product language stayed consistent because it came from the same people and the same contracts.',
+      'Shipping to the App Store and Google Play also taught the team a discipline the web rarely enforces: a release is a moment you prepare for, not something that simply happens when you merge.',
     ],
   },
 ]

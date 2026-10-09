@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
-import { NOTE_TOPICS, POSTS } from '../data/content'
+import { formatPostDate, NOTE_TOPICS, POSTS } from '../data/content'
 
 export default function Notes() {
   return (
@@ -60,15 +60,46 @@ export default function Notes() {
                 ))}
               </ul>
 
-              <div className="mt-8 space-y-3" aria-hidden>
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="flex items-center gap-4 opacity-50">
-                    <span className="h-px flex-1 bg-line" />
-                    <span className="label">untitled</span>
-                    <span className="h-8 w-24 rounded border border-dashed border-line-strong" />
+              {POSTS.length > 0 ? (
+                <div className="mt-8">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="label">Latest notes</p>
+                    <Link
+                      to="/blog"
+                      className="link-underline inline-flex items-center gap-1 py-0.5 font-mono text-[11px] uppercase tracking-label text-ink-muted hover:text-ink"
+                    >
+                      View all <span aria-hidden>→</span>
+                    </Link>
                   </div>
-                ))}
-              </div>
+
+                  <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {POSTS.slice(0, 4).map((post) => (
+                      <li key={post.slug}>
+                        <Link
+                          to={`/blog/${post.slug}`}
+                          className="group flex h-full flex-col justify-between gap-4 rounded-lg border border-line bg-paper-sunk/50 p-4 transition-all duration-300 ease-out-expo hover:border-line-strong hover:bg-paper-raised"
+                        >
+                          <div>
+                            <p className="label">{formatPostDate(post.date)}</p>
+                            <p className="mt-2 line-clamp-2 text-[14.5px] font-medium leading-snug tracking-tight">
+                              {post.title}
+                            </p>
+                          </div>
+                          <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-label text-ink-faint transition-colors group-hover:text-accent-deep">
+                            {post.readingTime}
+                            <span
+                              aria-hidden
+                              className="transition-transform duration-300 group-hover:translate-x-0.5"
+                            >
+                              →
+                            </span>
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </div>
           </div>
         </Reveal>

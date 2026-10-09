@@ -1,8 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import { POSTS, PROFILE } from '../data/content'
+import { formatPostDate as formatDate, POSTS, PROFILE } from '../data/content'
 import { useDocumentTitle } from '../hooks'
-import { formatDate } from './Blog'
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()

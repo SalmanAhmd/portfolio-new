@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import { POSTS, PROFILE } from '../data/content'
+import { formatPostDate as formatDate, POSTS, PROFILE } from '../data/content'
 import { useDocumentTitle } from '../hooks'
-
-export function formatDate(iso: string): string {
-  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-}
 
 export default function Blog() {
   useDocumentTitle(`Notes — ${PROFILE.name}`)
